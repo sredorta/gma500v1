@@ -1,0 +1,14 @@
+<p>
+  testing works!
+</p>
+<ckeditor
+[(ngModel)]="YourModelNameHere"
+[config]="ckeConfig"
+#ckeditor
+debounce="500">
+<ckbutton [name]="'imageExplorer'"
+ [command]="'openImageExplorer'"
+ (click)="openImageExplorer($event)"
+ [label]="'Open image explorer'"
+ [toolbar]="'insert,1'">
+</ckbutton>
