@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import {LoginComponent} from './_auth/login/login.component';
 import {SignupComponent} from './_auth/signup/signup.component';
+import {NotifsComponent} from './_messaging/notifs/notifs.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -14,6 +15,11 @@ const routes: Routes = [
     component: SignupComponent,
     //canActivate: [LoggedOutGuard]
   },  
+  {
+    path: 'notifications',
+    component: NotifsComponent,
+    //canActivate: [LoggedOutGuard]
+  },   
 ];
 
 @NgModule({

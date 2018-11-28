@@ -20,12 +20,12 @@
                     </div>
             </button>   
             <div  fxLayout="column" fxLayoutAlign="center center">
-                <button mat-mini-fab color="white" [style.backgroundImage]="user.getAvatar(null)" style="background-size:cover;" routerLink='/profile' class="scaled"></button>           
+                <button mat-mini-fab color="white" [style.backgroundImage]="user.getAvatar(avatarSize)" style="background-size:cover;" routerLink='/profile' class="scaled"></button>           
                 <small style="font-size:10px;line-height:10px">{{user.account}}</small>
             </div>
             </div>  
             <div *ngIf="!user.isAvailable()" fxLayout="column" fxLayoutAlign="center center">
-                  <button  mat-mini-fab color="warn" routerLink='/login' class="scaled">
+                  <button  mat-mini-fab color="white" routerLink='/login' class="scaled">
                     <mat-icon matBadge="x" matBadgeColor="accent" aria-label="Déconnecté">person</mat-icon>
                   </button> 
                   <small style="font-size:10px;line-height:10px">Deconnecte</small>
@@ -38,9 +38,15 @@
       <mat-sidenav class="sidenav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <mat-nav-list>
+            <div *ngIf="!user.isAvailable()"> 
                 <div style="width:100%;padding:5px" fxLayoutAlign="center center"><button mat-raised-button color="primary" routerLink="/login" (click)="snav.toggle()">Login</button></div>
                 <div style="width:100%;padding:5px" fxLayoutAlign="center center"><button mat-stroked-button color="primary" routerLink="/signup" (click)="snav.toggle()">Signup</button></div>            
-          <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+            </div>
+            <div *ngIf="user.isAvailable()"> 
+                    <div style="width:100%;padding:5px" fxLayoutAlign="center center"><button mat-stroked-button color="primary"  (click)="snav.toggle();logout()">Logout</button></div>
+            </div>      
+            <mat-divider></mat-divider>  
+            <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
         </mat-nav-list>
       </mat-sidenav>
   

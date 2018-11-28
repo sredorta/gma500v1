@@ -35,6 +35,13 @@ export interface IApiUserAuth {
   avatar:any;
 }
 
+export interface IApiNotif {
+  id:number;
+  text: string;
+  isRead: boolean;
+  created_at: string;   
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -88,5 +95,22 @@ export class ApiService {
     return this.http.get<IApiUserAuth>(environment.apiURL+'/auth/user').map(res => <IApiUserAuth>res);
   }
 
+  //Invalidates token for logout
+  public logout() : Observable<any> {   
+    return this.http.post<any>(environment.apiURL +'/auth/logout', {});
+  }
 
+
+  //Gets the notifications
+  public getNotifs() : Observable<IApiNotif[]> {
+    return this.http.get<IApiNotif[]>(environment.apiURL+'/notifications').map(res => <IApiNotif[]>res);
+  }
+  //Mark a notification as read
+  public notificationMarkRead(id:number) :Observable<IApiNotif[]> {
+    return this.http.post<IApiNotif[]>(environment.apiURL +'/notifications/markread', {'id': id}).map(res => <IApiNotif[]>res);
+  }
+  //Mark a notification as read
+  public notificationDelete(id:number) :Observable<IApiNotif[]> {
+    return this.http.post<IApiNotif[]>(environment.apiURL +'/notifications/delete', {'id': id}).map(res => <IApiNotif[]>res);
+  }
 }

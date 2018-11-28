@@ -15,6 +15,8 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {ButtonModule} from 'primeng/button';
 import {GMapModule} from 'primeng/gmap';
 import { CKEditorModule } from 'ng2-ckeditor';
+import {TooltipModule} from 'primeng/tooltip';
+
 //import {EditorModule} from 'primeng/editor';
 //import { EditorModule } from '@tinymce/tinymce-angular';
 
@@ -83,6 +85,8 @@ import { TestingComponent } from './_library/testing/testing.component';
 import {ApiService} from './_services/api.service';
 import { SignupComponent } from './_auth/signup/signup.component';
 import {InputImageComponent} from './_library/input-image/input-image.component';
+import { NotifsComponent } from './_messaging/notifs/notifs.component';
+import { NiceDateFormatPipe } from './_pipes/nice-date-format.pipe';
 
 @NgModule({
   declarations: [
@@ -92,7 +96,9 @@ import {InputImageComponent} from './_library/input-image/input-image.component'
     ErrorSheetComponent,
     SignupComponent,
     TermsDialogComponent,
-    InputImageComponent
+    InputImageComponent,
+    NotifsComponent,
+    NiceDateFormatPipe
   ],
   imports: [
     BrowserModule,
@@ -110,6 +116,7 @@ import {InputImageComponent} from './_library/input-image/input-image.component'
     ButtonModule,
     ColorPickerModule,
     GMapModule,
+    TooltipModule,
 //    QuillModule,
     CKEditorModule
     ],

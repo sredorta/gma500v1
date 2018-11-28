@@ -1,9 +1,10 @@
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import { Router, Event, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {LoginComponent} from './_auth/login/login.component';
 import { TranslateService } from '@ngx-translate/core'; //NGS-TRANSLATE
-import {User} from './_models/user';
+import {User, avatarSizes} from './_models/user';
 import {ApiService, IApiUserAuth} from './_services/api.service';
 
 @Component({
@@ -15,11 +16,12 @@ export class AppComponent {
   title = 'app';
   user : User = new User(null);
   loading : boolean = true;
+  avatarSize: avatarSizes = avatarSizes.thumbnail;
   private _subscriptions : Subscription[] = new Array<Subscription>();
 
 
   color:string;
-  constructor(private api: ApiService, private translate: TranslateService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(private api: ApiService, private router : Router, private translate: TranslateService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.translate.use("fr");
 
     //This needs to be moved into config page
@@ -49,6 +51,14 @@ export class AppComponent {
 
   private _mobileQueryListener: () => void;
 
+
+  logout() {
+    this._subscriptions.push(this.api.logout().subscribe(res=> {
+      this.api.setCurrent(new User(null));
+      User.removeToken();
+      this.router.navigate([""]); //Go back home
+    }));
+  }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);

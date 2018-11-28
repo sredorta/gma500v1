@@ -1,0 +1,24 @@
+th,td {
+    min-width:60px;
+  }
+
+  table {
+    width: 100%;
+  }
+  //On small screens change table font-size
+  @media only screen and (max-width: 500px) {
+    .mat-cell {
+      font-size:12px;
+    }
+    mat-icon {
+      transform:scale(0.8);
+    }
+  }
+
+  .clickable {
+      cursor:pointer;
+  }
+
+  .unread {
+    font-weight: bolder;
+  }
